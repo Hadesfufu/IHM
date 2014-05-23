@@ -152,10 +152,10 @@ public class FicheContactUI extends JPanel {
             DateNaissance3.setSelectedItem(contact.getDateNaissance()[0]);
             DateNaissance2.setSelectedItem(contact.getDateNaissance()[1]);
             DateNaissance1.setSelectedItem(contact.getDateNaissance()[2]);
-               
+            
             Origine.setSelectedIndex(contact.getRegion().ordinal());
             for(int i = 0; i < DispoSortie.values().length; i++){
-            BWAWAWAW
+            
             }
             
             int Stylys[] = new int[contact.getGoutsMusicaux().length];

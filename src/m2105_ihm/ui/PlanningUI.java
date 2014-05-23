@@ -4,6 +4,10 @@
 package m2105_ihm.ui;
 
 import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
 import m2105_ihm.Controleur;
 import m2105_ihm.nf.Evenement;
 
@@ -16,13 +20,19 @@ public class PlanningUI extends javax.swing.JPanel {
      * Creates new form CarnetUI
      */
     
+    private JPanel Info,Participants;
+    private JList Events;
+    private JLabel Nom, Date;
+    private JButton Modifier, Ajouter, Retirer;
     private Controleur controleur;    
 
     public PlanningUI(Controleur controleur) {
         super();
         
         this.controleur = controleur;
-                
+        
+        
+        
         initComponents();
     }
 

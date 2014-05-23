@@ -95,7 +95,7 @@ public class Controleur {
     if(this.afficherConfirmation(buff))
     {
     nf.supprimerGroupe(buff);
-    carnetUI.retirerContact(buff);
+    carnetUI.retirerGroupe(buff);
     }
     }
     
@@ -103,14 +103,14 @@ public class Controleur {
      * Ajouter un contact à un groupe
      */
     public void ajouterContactGroupe() {
-        nf.ajouterContactGroupe(this.afficherChoixMembreContact("Ajouter Groupe", carnetUI.getSelectedContact(), nf.listeGroupes()), carnetUI.getSelectedContact());   
+        nf.ajouterContactGroupe(this.afficherChoixMembreContact("Ajouter Groupe",  nf.listeGroupes()),  carnetUI.getSelectedContact());
     }
 
     /**
      * Retirer un contact d'un groupe
      */
     public void retirerContactGroupe() {
-        nf.retirerContactGroupe(this.afficherChoixMembreContact("Retirer Groupe", carnetUI.getSelectedContact(), nf.listerGroupesContact(carnetUI.getSelectedContact())), carnetUI.getSelectedContact());
+        nf.retirerContactGroupe(this.afficherChoixMembreContact("Retirer Groupe", nf.listerGroupesContact(carnetUI.getSelectedContact())), carnetUI.getSelectedContact());
     }
 
     /**
