@@ -63,6 +63,7 @@ public class PlanningUI extends javax.swing.JPanel {
         Info.add(Date, BorderLayout.CENTER);
         Info.add(Modifier, BorderLayout.EAST);
         
+        LMEvent = new DefaultListModel();
         ListParti = new JList(LMEvent);
         Ajouter = new JButton("Ajouter");
         Retirer = new JButton("Retirer");
@@ -93,9 +94,12 @@ public class PlanningUI extends javax.swing.JPanel {
      * @param Evenement événement à ajouter
      */
     public boolean ajouterEvt(Evenement evt) {
-        
+        if(evt != null){
         LMEvent.addElement(evt);
-        return true;
+        return true;}
+        else{
+        return false;
+        }
     }
     
     /**

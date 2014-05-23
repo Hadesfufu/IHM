@@ -3,6 +3,8 @@
  */
 package m2105_ihm.ui;
 
+import m2105_ihm.nf.Contact;
+
 /**
  *
  * @author IUT2
@@ -12,7 +14,7 @@ public class AjoutParticipants extends javax.swing.JFrame {
     /**
      * Creates new form ConfirmationUI
      */
-    public AjoutParticipants() {
+    public AjoutParticipants(Contact[] contacts) {
         initComponents();
     }
 
@@ -120,11 +122,11 @@ public class AjoutParticipants extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AjoutParticipants().setVisible(true);
             }
-        });
+        });*/
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;

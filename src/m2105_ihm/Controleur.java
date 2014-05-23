@@ -13,6 +13,7 @@ import m2105_ihm.nf.Contact;
 import m2105_ihm.nf.GroupeContacts;
 import m2105_ihm.nf.CarnetPlanning;
 import m2105_ihm.nf.Evenement;
+import m2105_ihm.ui.AjoutParticipants;
 
 /**
  *
@@ -117,20 +118,22 @@ public class Controleur {
      * 
      */
     public void creerEvenement() {
-        
+        Evenement buff = new Evenement();
+        this.planningUI.ajouterEvt(buff);
     }
 
     /**
      * 
      */
     public void supprimerEvenement() {
-        
+        this.planningUI.retirerEvt(this.planningUI.getSelectedEvt());
     }
     
     /**
      * 
      */
     public void ajouterParticipantEvenement() {
+   //     AjoutParticipants fen = new AjoutParticipants();
         
     }
 
