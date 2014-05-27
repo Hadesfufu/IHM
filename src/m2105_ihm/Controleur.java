@@ -14,6 +14,7 @@ import m2105_ihm.nf.GroupeContacts;
 import m2105_ihm.nf.CarnetPlanning;
 import m2105_ihm.nf.Evenement;
 import m2105_ihm.ui.AjoutParticipants;
+import m2105_ihm.ui.CreationEvent;
 
 /**
  *
@@ -119,7 +120,13 @@ public class Controleur {
      */
     public void creerEvenement() {
         Evenement buff = new Evenement();
-        this.planningUI.ajouterEvt(buff);
+        CreationEvent ce = new CreationEvent(buff, fenetre);
+        ce.setVisible(true);
+        if(!ce.isCancel())
+        {
+         this.planningUI.ajouterEvt(buff);
+         this.nf.ajouterEvenement(buff);
+        }
     }
 
     /**

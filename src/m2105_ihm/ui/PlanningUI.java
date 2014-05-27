@@ -5,6 +5,8 @@ package m2105_ihm.ui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -35,13 +37,13 @@ public class PlanningUI extends javax.swing.JPanel {
 
     public PlanningUI(Controleur controleur) {
         super();
-         
+        this.controleur = controleur;
         initComponents();
+        initActionListener();
     }
 
     private void initComponents() {
         this.add(new javax.swing.JLabel("Evenements"));
-        this.controleur = controleur;
         Info = new JPanel();
         Info.setLayout(new BorderLayout());
         Info.setBorder(BorderFactory.createTitledBorder("Info :"));
@@ -89,16 +91,22 @@ public class PlanningUI extends javax.swing.JPanel {
        
     }
     
+    private void initActionListener(){
+     plus.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controleur.creerEvenement();
+                }
+          });
+    }
+    
     /**
      * Ajoute une entrée dans la liste de événements
      * @param Evenement événement à ajouter
      */
-    public boolean ajouterEvt(Evenement evt) {
+    public void ajouterEvt(Evenement evt) {
         if(evt != null){
         LMEvent.addElement(evt);
-        return true;}
-        else{
-        return false;
         }
     }
     
@@ -106,12 +114,9 @@ public class PlanningUI extends javax.swing.JPanel {
      * Retire un événement de la liste
      * @param Evenement événement à retirer
      */    
-    public boolean retirerEvt(Evenement evt) {
+    public void retirerEvt(Evenement evt) {
         if(LMEvent.contains(evt)){
         LMEvent.removeElement(evt);
-        return true;}
-        else{ 
-            return false;
         }
     }    
 
