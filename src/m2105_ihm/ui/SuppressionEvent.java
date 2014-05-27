@@ -3,22 +3,32 @@
  */
 package m2105_ihm.ui;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author IUT2
  */
-public class SuppressionEvent extends javax.swing.JFrame {
+public class SuppressionEvent extends javax.swing.JDialog {
 
     /**
      * Creates new form ConfirmationUI
      */
-    public SuppressionEvent(String text2) {
+    
+    private boolean confirmation;
+    
+    public SuppressionEvent(String text2, JFrame parent) {
+        super(parent);
         initComponents();
         this.jLabel2.setText(text2);
     }
 
     private SuppressionEvent() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public boolean confirmer(){
+        return confirmation;
     }
 
     /**
@@ -37,12 +47,17 @@ public class SuppressionEvent extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Suppression?");
 
         jLabel1.setText("SUPPRESSION D'EVENEMENT");
 
         jButton1.setText("Annuler");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Confirmer");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -100,8 +115,12 @@ public class SuppressionEvent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        confirmation = true;
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        confirmation = false;
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,4 +165,6 @@ public class SuppressionEvent extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
+
+    
 }
