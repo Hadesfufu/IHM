@@ -18,7 +18,7 @@ public class SuppressionEvent extends javax.swing.JDialog {
     private boolean confirmation;
     
     public SuppressionEvent(String text2, JFrame parent) {
-        super(parent);
+        super(parent, true);
         initComponents();
         this.jLabel2.setText(text2);
     }
