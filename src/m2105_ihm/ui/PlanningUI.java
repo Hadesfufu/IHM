@@ -44,20 +44,26 @@ public class PlanningUI extends javax.swing.JPanel {
 
     private void initComponents() {
         this.add(new javax.swing.JLabel("Evenements"));
+        
+        //Panel Info
         Info = new JPanel();
         Info.setLayout(new BorderLayout());
         Info.setBorder(BorderFactory.createTitledBorder("Info :"));
         
+        //Panel Participants
         Participants = new JPanel();
         Participants.setLayout(new BorderLayout());
         Participants.setBorder(BorderFactory.createTitledBorder("Participants :"));
         
+        //Panel Event ! 
         PEvent = new JPanel();
         PEvent.setLayout(new BorderLayout());
         
+        //Panel grandPanel
         RC = new JPanel();
         RC.setLayout(new BorderLayout());
         
+        //Elements Info
         Nom = new JLabel("El Bobo!");
         Date = new JLabel("El Bobo! 2403");
         Modifier = new JButton("Modifier");
@@ -65,8 +71,8 @@ public class PlanningUI extends javax.swing.JPanel {
         Info.add(Date, BorderLayout.CENTER);
         Info.add(Modifier, BorderLayout.EAST);
         
-        LMEvent = new DefaultListModel();
-        ListParti = new JList(LMEvent);
+        //Element Participants
+        ListParti = new JList();
         Ajouter = new JButton("Ajouter");
         Retirer = new JButton("Retirer");
         
@@ -74,7 +80,9 @@ public class PlanningUI extends javax.swing.JPanel {
         Participants.add(Ajouter);
         Participants.add(Retirer);
         
-        ListEvent = new JList<Evenement>();
+        
+        LMEvent = new DefaultListModel<Evenement>();
+        ListEvent = new JList(LMEvent);
         plus = new JButton("+");
         moins = new JButton("-");
         
@@ -98,6 +106,12 @@ public class PlanningUI extends javax.swing.JPanel {
                     controleur.creerEvenement();
                 }
           });
+     moins.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controleur.supprimerEvenement();
+                }
+          });
     }
     
     /**
@@ -105,9 +119,9 @@ public class PlanningUI extends javax.swing.JPanel {
      * @param Evenement événement à ajouter
      */
     public void ajouterEvt(Evenement evt) {
-        if(evt != null){
+       // if(evt != null){
         LMEvent.addElement(evt);
-        }
+        //}
     }
     
     /**

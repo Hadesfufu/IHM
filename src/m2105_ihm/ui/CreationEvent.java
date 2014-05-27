@@ -18,12 +18,11 @@ public class CreationEvent extends javax.swing.JDialog {
      * Creates new form ConfirmationUI
      */
     public CreationEvent(Evenement e, JFrame parent) {
-        super(parent);
+        super(parent, true);
         event = e;
         initComponents();
         this.initaliseComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +43,8 @@ public class CreationEvent extends javax.swing.JDialog {
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Suppression?");
+        setTitle("Creation Evenements");
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 
         jLabel1.setText("CREATION D'EVENEMENT");
 
@@ -153,7 +153,8 @@ public class CreationEvent extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         cancel = false;
-        event.setDate(this.jComboBox1.getSelectedIndex(), this.jComboBox2.getSelectedIndex(), this.jComboBox3.getSelectedIndex());
+        event.setDate(this.jComboBox3.getSelectedIndex()+1914, this.jComboBox2.getSelectedIndex()+1, this.jComboBox1.getSelectedIndex()+1);
+        event.setIntitule(this.jTextField1.getText());
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
     
