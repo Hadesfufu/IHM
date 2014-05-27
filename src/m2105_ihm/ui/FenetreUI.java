@@ -62,6 +62,7 @@ public class FenetreUI extends JFrame {
        barreMenu = new JMenuBar();
        barreMenu.add(initMenuFichier());
        barreMenu.add(initMenuContacts());
+       barreMenu.add(initMenuEvenements());
        this.setJMenuBar(barreMenu);
     }
 
@@ -166,8 +167,48 @@ public class FenetreUI extends JFrame {
      * Crée un menu pour la gestion des évènements
      */
     private JMenu initMenuEvenements() {
-        /* A COMPLETER TP5 */
-        return null;
+        
+        JMenu menuEvents = new JMenu("Evènements");
+        
+        menuEvenements[0] = new JMenuItem("Create new event");
+        menuEvenements[0].addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controleur.creerEvenement();
+                }
+          });
+        menuEvents.add(menuEvenements[0]);
+        
+        menuEvenements[1] = new JMenuItem("Delete event");
+        menuEvenements[1].addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controleur.supprimerEvenement();
+                }
+          });
+        menuEvents.add(menuEvenements[1]);
+        
+        
+        menuEvenements[2] = new JMenuItem("Add participant");
+        menuEvenements[2].addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controleur.ajouterParticipantEvenement();
+                }
+          });
+        menuEvents.add(menuEvenements[2]);
+        
+        
+        menuEvenements[3] = new JMenuItem("Delete participant");
+        menuEvenements[3].addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controleur.retirerParticipantEvenement();
+                }
+          });
+        menuEvents.add(menuEvenements[3]);
+        
+        return menuEvents;
     }    
     
     /**

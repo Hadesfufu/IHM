@@ -14,6 +14,7 @@ import m2105_ihm.nf.GroupeContacts;
 import m2105_ihm.nf.CarnetPlanning;
 import m2105_ihm.nf.Evenement;
 import m2105_ihm.ui.AjoutParticipants;
+import m2105_ihm.ui.CreationEvent;
 import m2105_ihm.ui.SuppressionEvent;
 
 /**
