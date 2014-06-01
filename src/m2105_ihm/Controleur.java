@@ -15,6 +15,7 @@ import m2105_ihm.nf.CarnetPlanning;
 import m2105_ihm.nf.Evenement;
 import m2105_ihm.ui.AjoutParticipants;
 import m2105_ihm.ui.CreationEvent;
+import m2105_ihm.ui.ModificationEvent;
 import m2105_ihm.ui.SuppressionEvent;
 
 /**
@@ -133,15 +134,27 @@ public class Controleur {
     /**
      * 
      */
+    
     public void supprimerEvenement() {
         Evenement buff = planningUI.getSelectedEvt();
+        if(buff != null){
         SuppressionEvent se = new SuppressionEvent(buff.getIntitule(), fenetre);
         se.setVisible(true);
         if(se.confirmer()){
             nf.retirerEvenement(this.planningUI.getSelectedEvt());
             this.planningUI.retirerEvt(this.planningUI.getSelectedEvt());            
-        }  
-      
+            }  
+        }
+    }
+    
+    /**
+     * 
+     */
+    
+    public void editerEvenement(){
+        Evenement e = this.planningUI.getSelectedEvt();
+        ModificationEvent me = new ModificationEvent(e, fenetre);
+        me.setVisible(true);
     }
     
     /**

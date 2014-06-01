@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import m2105_ihm.Controleur;
 import m2105_ihm.nf.Contact;
 import m2105_ihm.nf.Evenement;
@@ -29,7 +31,7 @@ public class PlanningUI extends javax.swing.JPanel {
     
     private JPanel Info,Participants, PButtons, PEvent, RC;
     private JList<Evenement> ListEvent;
-    private DefaultListModel LMEvent;
+    private DefaultListModel LMEvent, LMParti;
     private JList<Contact> ListParti;
     private JLabel Nom, Date;
     private JButton Modifier, Ajouter, Retirer, plus, moins;
@@ -47,7 +49,7 @@ public class PlanningUI extends javax.swing.JPanel {
         
         //Panel Info
         Info = new JPanel();
-        Info.setLayout(new BorderLayout());
+        Info.setLayout(new GridLayout(0,2));
         Info.setBorder(BorderFactory.createTitledBorder("Info :"));
         
         //Panel Participants
@@ -64,21 +66,24 @@ public class PlanningUI extends javax.swing.JPanel {
         RC.setLayout(new BorderLayout());
         
         //Elements Info
-        Nom = new JLabel("El Bobo!");
-        Date = new JLabel("El Bobo! 2403");
+        Nom = new JLabel("Bobo ! ");
+        Date = new JLabel("21 juin 2014");
         Modifier = new JButton("Modifier");
-        Info.add(Nom, BorderLayout.NORTH);
-        Info.add(Date, BorderLayout.CENTER);
-        Info.add(Modifier, BorderLayout.EAST);
+        Info.add(new JLabel("Nom : "));
+        Info.add(Nom);
+        Info.add(new JLabel("Date : "));
+        Info.add(Date);
+        Info.add(Modifier);
         
         //Element Participants
-        ListParti = new JList();
+        LMParti = new DefaultListModel<Contact>();
+        ListParti = new JList(LMParti);
         Ajouter = new JButton("Ajouter");
         Retirer = new JButton("Retirer");
         
-        Participants.add(ListParti);
-        Participants.add(Ajouter);
-        Participants.add(Retirer);
+        Participants.add(ListParti, BorderLayout.NORTH);
+        Participants.add(Ajouter, BorderLayout.WEST);
+        Participants.add(Retirer, BorderLayout.EAST);
         
         
         LMEvent = new DefaultListModel<Evenement>();
@@ -110,6 +115,20 @@ public class PlanningUI extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     controleur.supprimerEvenement();
+                }
+          });
+    ListEvent.addListSelectionListener(new ListSelectionListener(){
+            public void valueChanged(ListSelectionEvent evt) {
+                miseAJourInfos();
+                }
+          });
+    Modifier.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(getSelectedEvt() != null){
+                    controleur.editerEvenement();
+                    miseAJourInfos();
+                    }
                 }
           });
     }
@@ -147,4 +166,18 @@ public class PlanningUI extends javax.swing.JPanel {
     private Controleur getControleur() {
         return controleur;
     }    
+    private void afficherParticipants(Evenement evt){
+        
+        this.LMParti.clear();
+        for(Contact c : controleur.getListeContacts(evt)){
+        LMParti.addElement(c);
+        }
+    }
+    private void miseAJourInfos(){
+        Evenement event = getSelectedEvt();
+        this.Nom.setText(event.getIntitule());
+        this.Date.setText(event.getDate()[2] + "/" + event.getDate()[1] + "/" + event.getDate()[0]);
+        afficherParticipants(event);
+    }
+
 }

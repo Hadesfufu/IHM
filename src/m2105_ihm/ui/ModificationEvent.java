@@ -3,19 +3,28 @@
  */
 package m2105_ihm.ui;
 
+import javax.swing.JFrame;
+import m2105_ihm.nf.Evenement;
+
 /**
  *
  * @author IUT2
  */
-public class ModificationEvent extends javax.swing.JFrame {
-
+public class ModificationEvent extends javax.swing.JDialog {
+    
+    private Evenement event;
     /**
      * Creates new form ConfirmationUI
      */
-    public ModificationEvent(String t, int i) {
+    public ModificationEvent(Evenement e, JFrame parent) {
+        super(parent, true);
         initComponents();
-        this.jTextField1.setText(t);
-        this.jComboBox1.setSelectedIndex(i);
+        initaliseComponents();
+        this.jTextField1.setText(e.getIntitule());
+        this.jComboBox1.setSelectedItem(e.getDate()[0]);
+        this.jComboBox2.setSelectedItem(e.getDate()[1]);
+        this.jComboBox3.setSelectedItem(e.getDate()[2]);
+        event = e;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,14 +45,13 @@ public class ModificationEvent extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Suppression?");
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 
         jLabel1.setText("MODIFICATION D'EVENEMENT");
 
         jLabel2.setText("Changez la date : ");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
@@ -60,6 +68,11 @@ public class ModificationEvent extends javax.swing.JFrame {
         });
 
         jButton1.setText("Annuler");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Modifier");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -131,46 +144,32 @@ public class ModificationEvent extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    event.setIntitule(this.jTextField1.getText());
+    event.setDate(jComboBox1.getSelectedIndex(), jComboBox1.getSelectedIndex()+1, jComboBox1.getSelectedIndex()+1914);
+    this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModificationEvent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModificationEvent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModificationEvent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModificationEvent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ModificationEvent("Bobo En Soiree", 3).setVisible(true);
-            }
-        });
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    this.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void initaliseComponents(){
+       
+        Integer[] buffer = new Integer[31];
+        for(int i = 0; i < buffer.length; i++){buffer[i] = i+1;}
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(buffer));
+        
+        buffer = new Integer[12];
+        for(int i = 0; i < buffer.length; i++){buffer[i] = i+1;}
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(buffer));
+        
+        buffer = new Integer[200];
+        for(int i = 0; i < buffer.length; i++){buffer[i] = i+1914;}
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(buffer));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -5,6 +5,7 @@ package m2105_ihm.ui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import m2105_ihm.nf.*;
@@ -52,7 +53,6 @@ public class FicheContactUI extends JPanel {
         Identite.setBorder(BorderFactory.createTitledBorder("Identité"));
         Preferences = new JPanel();
         Preferences.setLayout(new BorderLayout());
-        Identite.setBorder(BorderFactory.createTitledBorder("Préférences"));
         Buttons = new JPanel();
         Buttons.setLayout(new BorderLayout());
         this.add(Identite, BorderLayout.NORTH);
@@ -136,6 +136,7 @@ public class FicheContactUI extends JPanel {
         
         Buttons.add(new JButton("Cancel"), BorderLayout.WEST);
         Buttons.add(new JButton("Accept"), BorderLayout.EAST);
+        
         
       
         
