@@ -21,9 +21,10 @@ public class ModificationEvent extends javax.swing.JDialog {
         initComponents();
         initaliseComponents();
         this.jTextField1.setText(e.getIntitule());
-        this.jComboBox1.setSelectedItem(e.getDate()[0]);
+        int[] date = e.getDate();
+        this.jComboBox1.setSelectedItem(e.getDate()[2]);
         this.jComboBox2.setSelectedItem(e.getDate()[1]);
-        this.jComboBox3.setSelectedItem(e.getDate()[2]);
+        this.jComboBox3.setSelectedItem(e.getDate()[0]);
         event = e;
     }
     /**
@@ -149,7 +150,7 @@ public class ModificationEvent extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     event.setIntitule(this.jTextField1.getText());
-    event.setDate(jComboBox1.getSelectedIndex(), jComboBox1.getSelectedIndex()+1, jComboBox1.getSelectedIndex()+1914);
+    event.setDate((Integer)jComboBox3.getSelectedItem(), (Integer)jComboBox2.getSelectedItem(), (Integer)jComboBox1.getSelectedItem());
     this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 

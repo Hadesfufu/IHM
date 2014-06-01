@@ -3,19 +3,31 @@
  */
 package m2105_ihm.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JList;
 import m2105_ihm.nf.Contact;
+import m2105_ihm.nf.Evenement;
 
 /**
  *
  * @author IUT2
  */
-public class AjoutParticipants extends javax.swing.JFrame {
-
+public class AjoutParticipants extends javax.swing.JDialog {
+    
+      private DefaultListModel LMParticipants;
+      boolean cancel = true;
     /**
      * Creates new form ConfirmationUI
      */
-    public AjoutParticipants(Contact[] contacts) {
+    public AjoutParticipants(List<Contact> contacts, JFrame parent) {
+        super(parent, true);
+        this.LMParticipants = new DefaultListModel<Contact>();
         initComponents();
+        //this.jList1 = new JList<Contact>(LMParticipants);
+        for(Contact c: contacts){LMParticipants.addElement(c);}
     }
 
     /**
@@ -34,21 +46,28 @@ public class AjoutParticipants extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Suppression?");
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
 
         jLabel1.setText("Ajout de participants");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        jList1.setModel(LMParticipants);
         jScrollPane1.setViewportView(jList1);
 
         jButton3.setText("Ajouter");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Annuler");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Liste de contacts");
 
@@ -94,40 +113,25 @@ public class AjoutParticipants extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        cancel = true;
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        cancel = false;
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+    
+    public boolean isCancel(){return cancel;}
+    
+    public List<Contact> getResult(){
+        return this.jList1.getSelectedValuesList();
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AjoutParticipants.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AjoutParticipants.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AjoutParticipants.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AjoutParticipants.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        /*java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AjoutParticipants().setVisible(true);
-            }
-        });*/
-    }
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

@@ -29,7 +29,7 @@ public class PlanningUI extends javax.swing.JPanel {
      * Creates new form CarnetUI
      */
     
-    private JPanel Info,Participants, PButtons, PEvent, RC;
+    private JPanel Info,Participants, PEvent, PInfoParti, PEventB;
     private JList<Evenement> ListEvent;
     private DefaultListModel LMEvent, LMParti;
     private JList<Contact> ListParti;
@@ -45,8 +45,6 @@ public class PlanningUI extends javax.swing.JPanel {
     }
 
     private void initComponents() {
-        this.add(new javax.swing.JLabel("Evenements"));
-        
         //Panel Info
         Info = new JPanel();
         Info.setLayout(new GridLayout(0,2));
@@ -60,14 +58,19 @@ public class PlanningUI extends javax.swing.JPanel {
         //Panel Event ! 
         PEvent = new JPanel();
         PEvent.setLayout(new BorderLayout());
+        PEvent.setBorder(BorderFactory.createTitledBorder("Evenements :"));
         
-        //Panel grandPanel
-        RC = new JPanel();
-        RC.setLayout(new BorderLayout());
+        //Panel regroupant Informations et Participants
+        PInfoParti = new JPanel();
+        PInfoParti.setLayout(new BorderLayout());
         
+        //Panel pour les boutons
+        PEventB = new JPanel();
+        PEventB.setLayout(new BorderLayout());
+                  
         //Elements Info
-        Nom = new JLabel("Bobo ! ");
-        Date = new JLabel("21 juin 2014");
+        Nom = new JLabel("Nom evenement");
+        Date = new JLabel("Date evenement");
         Modifier = new JButton("Modifier");
         Info.add(new JLabel("Nom : "));
         Info.add(Nom);
@@ -91,16 +94,19 @@ public class PlanningUI extends javax.swing.JPanel {
         plus = new JButton("+");
         moins = new JButton("-");
         
+        PEventB.add(plus, BorderLayout.EAST);
+        PEventB.add(moins, BorderLayout.WEST);
+        
         PEvent.add(ListEvent, BorderLayout.NORTH);
-        PEvent.add(plus, BorderLayout.EAST);
-        PEvent.add(moins, BorderLayout.WEST);
+        PEvent.add(PEventB, BorderLayout.SOUTH);
+                
+        PInfoParti.add(Info, BorderLayout.NORTH);
+        PInfoParti.add(Participants, BorderLayout.SOUTH);
         
+        this.setLayout(new GridLayout(0,2));
+        this.add(PEvent);  
+        this.add(PInfoParti);
         
-        RC.add(Info, BorderLayout.NORTH);
-        RC.add(Participants, BorderLayout.SOUTH);
-        
-        this.add(PEvent, BorderLayout.WEST);
-        this.add(RC, BorderLayout.EAST);
        
     }
     
@@ -127,8 +133,23 @@ public class PlanningUI extends javax.swing.JPanel {
                 public void actionPerformed(ActionEvent e) {
                     if(getSelectedEvt() != null){
                     controleur.editerEvenement();
-                    miseAJourInfos();
                     }
+                    miseAJourInfos();
+                    ListEvent.repaint();
+                }
+          });
+    Ajouter.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controleur.ajouterParticipantEvenement();
+                    miseAJourInfos();
+                }
+          });
+    Retirer.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controleur.retirerParticipantEvenement();
+                    miseAJourInfos();
                 }
           });
     }
