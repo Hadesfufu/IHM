@@ -3,19 +3,24 @@
  */
 package m2105_ihm;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import m2105_ihm.ui.CarnetUI;
-import m2105_ihm.ui.FenetreUI;
-import m2105_ihm.ui.PlanningUI;
-
-import m2105_ihm.nf.Contact;
-import m2105_ihm.nf.GroupeContacts;
 import m2105_ihm.nf.CarnetPlanning;
+import m2105_ihm.nf.Contact;
 import m2105_ihm.nf.Evenement;
+import m2105_ihm.nf.GroupeContacts;
 import m2105_ihm.ui.AjoutParticipants;
 import m2105_ihm.ui.CreationEvent;
+import m2105_ihm.ui.CarnetUI;
+import m2105_ihm.ui.CreationEvent;
+import m2105_ihm.ui.FenetreUI;
+import m2105_ihm.ui.ModificationEvent;
+import m2105_ihm.ui.PlanningUI;
 import m2105_ihm.ui.SuppressionEvent;
+import m2105_ihm.ui.SuppressionParticipants;
 
 /**
  *
@@ -133,30 +138,63 @@ public class Controleur {
     /**
      * 
      */
+    
     public void supprimerEvenement() {
         Evenement buff = planningUI.getSelectedEvt();
+        if(buff != null){
         SuppressionEvent se = new SuppressionEvent(buff.getIntitule(), fenetre);
         se.setVisible(true);
         if(se.confirmer()){
             nf.retirerEvenement(this.planningUI.getSelectedEvt());
             this.planningUI.retirerEvt(this.planningUI.getSelectedEvt());            
-        }  
-      
+            }  
+        }
+    }
+    
+    /**
+     * 
+     */
+    
+    public void editerEvenement(){
+        Evenement e = this.planningUI.getSelectedEvt();
+        ModificationEvent me = new ModificationEvent(e, fenetre);
+        me.setVisible(true);
     }
     
     /**
      * 
      */
     public void ajouterParticipantEvenement() {
-   //     AjoutParticipants fen = new AjoutParticipants();
-        
-    }
+      Evenement e = this.planningUI.getSelectedEvt();
+      if(e != null){
+      List<Contact> TotalContact = new LinkedList<Contact>(Arrays.asList(this.nf.listeContacts()));
+      List<Contact> Ajout;
+      List<Contact> Participants = new LinkedList<Contact>(Arrays.asList(this.getListeContacts(this.planningUI.getSelectedEvt())));
+      TotalContact.removeAll(Participants);
+      AjoutParticipants ap = new AjoutParticipants(TotalContact, fenetre);
+      ap.setVisible(true);
+      if(!ap.isCancel()){
+      for(Contact c : ap.getResult()){
+          this.nf.ajouterParticipantEvenement(e, c);}
+      }
+      }
+ }
 
     /**
      * 
      */
     public void retirerParticipantEvenement() {
-        
+        Evenement e = this.planningUI.getSelectedEvt();
+        if(e != null){
+            List<Contact> Participants = new LinkedList<Contact>(Arrays.asList(this.getListeContacts(this.planningUI.getSelectedEvt())));
+            SuppressionParticipants sp = new SuppressionParticipants(Participants, fenetre);
+            sp.setVisible(true);
+            if(!sp.isCancel()){
+                for(Contact c : sp.getResult()){
+                     this.nf.retirerParticipantEvenement(e, c);
+                }
+            }
+        }
     }
 
     /**

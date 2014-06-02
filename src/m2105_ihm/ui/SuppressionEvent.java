@@ -116,10 +116,12 @@ public class SuppressionEvent extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         confirmation = true;
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         confirmation = false;
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
