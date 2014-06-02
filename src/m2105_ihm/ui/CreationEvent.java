@@ -82,8 +82,6 @@ public class CreationEvent extends javax.swing.JDialog {
 
         jLabel3.setText("Entrez un nom : ");
 
-        jTextField1.setText("jTextField1");
-
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

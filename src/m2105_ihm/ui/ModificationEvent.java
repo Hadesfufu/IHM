@@ -21,7 +21,6 @@ public class ModificationEvent extends javax.swing.JDialog {
         initComponents();
         initaliseComponents();
         this.jTextField1.setText(e.getIntitule());
-        int[] date = e.getDate();
         this.jComboBox1.setSelectedItem(e.getDate()[2]);
         this.jComboBox2.setSelectedItem(e.getDate()[1]);
         this.jComboBox3.setSelectedItem(e.getDate()[0]);
@@ -84,7 +83,11 @@ public class ModificationEvent extends javax.swing.JDialog {
 
         jLabel3.setText("Changez le nom : ");
 
-        jTextField1.setText("jTextField1");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,6 +160,10 @@ public class ModificationEvent extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     this.setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
     
     private void initaliseComponents(){
        

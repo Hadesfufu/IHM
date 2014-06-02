@@ -196,6 +196,12 @@ public class PlanningUI extends javax.swing.JPanel {
     }
     private void miseAJourInfos(){
         Evenement event = getSelectedEvt();
+        if(event == null){
+        this.Nom.setText(" ");
+        this.Date.setText(" ");
+        this.LMParti.clear();
+        return;
+        }
         this.Nom.setText(event.getIntitule());
         this.Date.setText(event.getDate()[2] + "/" + event.getDate()[1] + "/" + event.getDate()[0]);
         afficherParticipants(event);
